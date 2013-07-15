@@ -14,7 +14,7 @@ class pywindow:
         self.backColor = backColor
     
     def updateRes(self):
-        self.resolution = (width, length)
+        self.resolution = (self.width, self.length)
         
     def updateScreen(self):
         if not self.fullscreen and not self.resizable and not self.frame:
