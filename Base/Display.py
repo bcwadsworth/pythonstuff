@@ -42,7 +42,7 @@ class pywindow:
 
     def update(self):
         self.screen.fill(self.backColor)
-        for n in range(gameObject.gameObjects - 1):
+        for n in range(0, gameObject.gameObjects):
             if gameObject.gameObjectArray[n][0]:
                 self.screen.blit(gameObject.gameObjectArray[n][1], gameObject.gameObjectArray[n][2])
                 # Array Entry = True, file, position
@@ -63,7 +63,7 @@ class gameObject:
          if blit:
               self.active = True
               self.blit = True
-              self.filename = filename
+              self.file = pygame.image.load(filename)
               self.x = x
               self.y = y
               self.array = -1
@@ -90,43 +90,42 @@ class gameObject:
               self.array = -1
           
          self.update()
+         print str(self) +" Initialized'
           
      def update(self):
-          gameObject.gameObjectArray
-          gameObject.gameObjects
           if self.active and self.blit:
                if self.array == -1:
                     self.position = (self.x,self.y)
-                    gameObjectArray.append([True, self.filename, self.position])
-                    self.array = len(gameObjectArray) - 1
-                    gameObjects += 1
+                    gameObject.gameObjectArray.append([True, self.file, self.position])
+                    self.array = len(gameObject.gameObjectArray) - 1
+                    gameObject.gameObjects += 1
                else:
                     self.position = (self.x,self.y)
-                    gameObjectArray[self.array] = [True, str(self.filename), self.position]
+                    gameObject.gameObjectArray[self.array] = [True, str(self.filename), self.position]
           elif self.active and self.shape:
                if self.array == -1:
                     self.rect = pygame.Rect(self.x, self.y, self.length, self.width)
-                    gameObjectArray.append([False, True, self.rect, self.color])
-                    self.array = len(gameObjectArray) - 1
-                    gameObjects += 1
+                    gameObject.gameObjectArray.append([False, True, self.rect, self.color])
+                    self.array = len(gameObject.gameObjectArray) - 1
+                    gameObject.gameObjects += 1
                else:
                     self.rect = pygame.Rect(self.x, self.y, self.length, self.width)
-                    gameObjectArray.append([False, True, self.rect, self.color])
+                    gameObject.gameObjectArray.append([False, True, self.rect, self.color])
           elif self.active and not self.shape:
                if self.array == -1:
                     self.position = (self.x,self.y)
-                    gameObjectArray.append([False, False, self.position, self.radius, self.color])
-                    self.array = len(gameObjectArray) - 1
-                    gameObjects += 1
+                    gameObject.gameObjectArray.append([False, False, self.position, self.radius, self.color])
+                    self.array = len(gameObject.gameObjectArray) - 1
+                    gameObject.gameObjects += 1
                else:
-                    gameObjectArray.append([False, False, self.position, self.radius, self.color])
+                    gameObject.gameObjectArray.append([False, False, self.position, self.radius, self.color])
           else:
                if self.array == -1:
                     pass
                else:
-                    gameObjectArray.remove(self.array)
+                    gameObject.gameObjectArray.remove(self.array)
                     self.array = -1
-                    gameObjects += -1
+                    gameObject.gameObjects += -1
                     
                
 
